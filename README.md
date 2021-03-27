@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# React Animation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Set Up
 
-## Available Scripts
+1. Fork and clone this repository.
+1. Change into the newly created directory with `cd react-animation`.
+1. Install the dependencies with `npm i`.
 
-In the project directory, you can run:
+### Create a Project from Scratch
 
-### `yarn start`
+If you'd like to start a new project _from scratch_ without cloning this repository, follow these steps instead:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Create a new react project using [create-react-app](https://create-react-app.dev/) by typing:
+   ```sh
+   npx create-react-app your-project-name
+   ```
+1. Install the additional dependencies with:
+   ```sh
+   npm i styled-components polished framer-motion react-router-dom
+   ```
+1. Create a theme and components directory inside of the src directory and add an index.js file to each. You can manually do this or do it at the command line by typing:
+   ```sh
+   mkdir src/theme src/components && touch src/theme/index.js src/components/index.js
+   ```
+1. Delete the `logo.svg`, `index.css`, and `App.css` files in the `src` directory.
+   ```sh
+   rm src/logo.svg src/index.css src/App.css
+   ```
+1. Open in your preferred code editor (type `code .` to open in Visual Studio Code).
+1. In the `src/theme` directory create a file named `GlobalStyle.js`. If you're planning to follow along with the tutorial, make sure to copy the file contents from [`src/theme/GlobalStyle.js`](./src/theme/GlobalStyle.js) file in this repository into your file.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+   ```js
+   import { createGlobalStyle } from 'styled-components';
 
-### `yarn test`
+   const GlobalStyle = createGlobalStyle`
+      /* GLOBAL STYLES HERE */
+   
+    `;
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   export default GlobalStyle;
+   ```
 
-### `yarn build`
+1. Inside the `src/theme/index.js` add the follow export:
+   ```js
+   export { default as GlobalStyle } from './GlobalStyle';
+   ```
+1. Replace the contents of `src/index.js` with the following:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```js
+   import React from 'react';
+   import ReactDOM from 'react-dom';
+   import { BrowserRouter as Router } from 'react-router-dom';
+   import { GlobalStyle } from './theme';
+   import App from './App';
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ReactDOM.render(
+     <React.StrictMode>
+       <Router>
+         <GlobalStyle />
+         <App />
+       </Router>
+     </React.StrictMode>,
+     document.getElementById('root')
+   );
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Replace the contents of `src/App.js` with:
 
-### `yarn eject`
+   ```js
+   const App = () => {
+     return <h1>Hello World</h1>;
+   };
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   export default App;
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Test your app using the npm start script (`npm run start`).
